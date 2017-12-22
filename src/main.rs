@@ -1,5 +1,5 @@
 
-//use std::io;
+use std::io;
 
 fn main() {
     println!("Guess the number!");
@@ -8,7 +8,7 @@ fn main() {
 
     let mut guess = String::new();
 
-    std::io::stdin().read_line(&mut guess)
+    io::stdin().read_line(&mut guess)
         .expect("Faild to read line");
 
     println!("You guessed: {}", guess);
