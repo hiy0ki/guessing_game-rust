@@ -8,6 +8,7 @@ fn main() {
 
     let mut guess = String::new();
 
+    // &mut はミュータブルな参照
     io::stdin().read_line(&mut guess)
         .expect("Faild to read line");
 
