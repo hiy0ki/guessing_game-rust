@@ -1,6 +1,7 @@
 extern crate rand;
 
 use std::io;
+use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
@@ -19,4 +20,11 @@ fn main() {
         .expect("Faild to read line");
 
     println!("You guessed: {}", guess);
+
+    // cmp()は比較したいものはなんでも呼べて、引数に比較対象の参照を取る
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
 }
