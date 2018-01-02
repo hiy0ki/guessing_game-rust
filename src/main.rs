@@ -11,25 +11,27 @@ fn main() {
 
     println!("The secret number is {}", secret_number);
 
-    println!("input your guess!");
+    loop {
+        println!("input your guess!");
+        
+        let mut guess = String::new();
 
-    let mut guess = String::new();
+        // &mut はミュータブルな参照
+        io::stdin().read_line(&mut guess)
+            .expect("Faild to read line");
 
-    // &mut はミュータブルな参照
-    io::stdin().read_line(&mut guess)
-        .expect("Faild to read line");
+        // このままではsecret_numberとguessの型が一致しないのでエラーになるためキャストする。
+        // 以前のguessを新しいguessで定義（隠す）することができる。これをシャドーイングという。
+        let guess: u32 = guess.trim().parse()
+            .expect("Please type a number!");
 
-    // このままではsecret_numberとguessの型が一致しないのでエラーになるためキャストする。
-    // 以前のguessを新しいguessで定義（隠す）することができる。これをシャドーイングという。
-    let guess: u32 = guess.trim().parse()
-        .expect("Please type a number!");
+        println!("You guessed: {}", guess);
 
-    println!("You guessed: {}", guess);
-
-    // cmp()は比較したいものはなんでも呼べて、引数に比較対象の参照を取る
-    match guess.cmp(&secret_number) {
-        Ordering::Less => println!("Too small!"),
-        Ordering::Greater => println!("Too big!"),
-        Ordering::Equal => println!("You win!"),
+        // cmp()は比較したいものはなんでも呼べて、引数に比較対象の参照を取る
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => println!("You win!"),
+        }
     }
 }
