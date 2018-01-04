@@ -22,8 +22,10 @@ fn main() {
 
         // このままではsecret_numberとguessの型が一致しないのでエラーになるためキャストする。
         // 以前のguessを新しいguessで定義（隠す）することができる。これをシャドーイングという。
-        let guess: u32 = guess.trim().parse()
-            .expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
 
         println!("You guessed: {}", guess);
 
